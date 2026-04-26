@@ -1,40 +1,200 @@
-As a strict code reviewer, I will review the previous outputs and provide feedback on the code quality, identify potential bugs, and suggest improvements.
-
-**Output from Planner (deepseek/deepseek-chat):**
-
-Unfortunately, I don't have access to the previous output from the planner. Please provide the output so I can review it.
-
-**Output from Coder (gemini/gemini-2.5-pro):**
-
-Similarly, I don't have access to the previous output from the coder. Please provide the output so I can review it.
-
-However, I can provide a basic example of how to create a simple PlugAI output with HTML and a brief explanation. This will serve as a starting point for further development.
-
-**Basic PlugAI Output:**
-
-```html
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>PlugAI Output</title>
+<meta charset="UTF-8">
+<title>Dark Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* CSS‑Variablen */
+  :root {
+    --bg-dark:#1e1e2e;
+    --bg-light:#2e2e3e;
+    --accent:#4e9a06;
+    --text-light:#f0f0f0;
+    --text-muted:#a0a0a0;
+    --card-bg:#2a2a3a;
+    --border-radius:8px;
+    --transition:0.3s ease;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg-dark);
+    color:var(--text-light);
+    display:flex;
+    min-height:100vh;
+  }
+  /* Sidebar */
+  .sidebar{
+    width:260px;
+    background:var(--bg-light);
+    padding:1rem;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+  }
+  .sidebar a{
+    color:var(--text-light);
+    text-decoration:none;
+    padding:.5rem .75rem;
+    border-radius:var(--border-radius);
+    transition:var(--transition);
+  }
+  .sidebar a:hover{
+    background:var(--accent);
+    color:#fff;
+  }
+  /* Main area */
+  .main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  .header{
+    background:var(--bg-light);
+    padding:1rem 1.5rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .header h1{font-size:1.5rem;}
+  .header button{
+    background:var(--accent);
+    border:none;
+    color:#fff;
+    padding:.5rem 1rem;
+    border-radius:var(--border-radius);
+    cursor:pointer;
+    transition:var(--transition);
+  }
+  .header button:hover{background:#3c7a04;}
+  .content{
+    padding:1.5rem;
+    flex:1;
+    overflow:auto;
+  }
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1.5rem;
+    margin-bottom:1.5rem;
+  }
+  .card{
+    background:var(--card-bg);
+    padding:1.5rem;
+    border-radius:var(--border-radius);
+    box-shadow:0 2px 6px rgba(0,0,0,.2);
+    transition:var(--transition);
+  }
+  .card:hover{transform:translateY(-4px);}
+  .card h3{margin-bottom:.5rem;font-size:1.1rem;}
+  .card p{font-size:1.8rem;font-weight:bold;}
+  .chart{
+    background:var(--card-bg);
+    height:300px;
+    border-radius:var(--border-radius);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-muted);
+    font-size:1.2rem;
+    margin-bottom:1.5rem;
+  }
+  .actions{
+    display:flex;
+    gap:.75rem;
+  }
+  .actions button{
+    background:var(--accent);
+    border:none;
+    color:#fff;
+    padding:.5rem 1rem;
+    border-radius:var(--border-radius);
+    cursor:pointer;
+    transition:var(--transition);
+  }
+  .actions button:hover{background:#3c7a04;}
+</style>
 </head>
 <body>
-    <h1>PlugAI Output</h1>
-    <p>This is a sample output from PlugAI.</p>
-    <p>It can be used as a starting point for further development.</p>
+  <nav class="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Berichte</a>
+    <a href="#">Einstellungen</a>
+    <a href="#">Hilfe</a>
+  </nav>
+  <div class="main">
+    <header class="header">
+      <h1>Dashboard</h1>
+      <button id="refreshBtn">Refresh</button>
+    </header>
+    <div class="content">
+      <section class="stats">
+        <div class="card">
+          <h3>Umsatz</h3>
+          <p id="revenue">$12,340</p>
+        </div>
+        <div class="card">
+          <h3>Benutzer</h3>
+          <p id="users">1,245</p>
+        </div>
+        <div class="card">
+          <h3>Bestellungen</h3>
+          <p id="orders">324</p>
+        </div>
+        <div class="card">
+          <h3>Support Tickets</h3>
+          <p id="tickets">27</p>
+        </div>
+      </section>
+      <section class="chart" id="chartPlaceholder">
+        Chart Placeholder
+      </section>
+      <section class="actions">
+        <button id="addBtn">Add New</button>
+        <button id="exportBtn">Export Data</button>
+      </section>
+    </div>
+  </div>
+
+<script>
+  // Dummy data refresh
+  function refreshData(){
+    document.getElementById('revenue').textContent = '$'+(Math.random()*20000).toFixed(0);
+    document.getElementById('users').textContent = Math.floor(Math.random()*2000);
+    document.getElementById('orders').textContent = Math.floor(Math.random()*500);
+    document.getElementById('tickets').textContent = Math.floor(Math.random()*50);
+  }
+  document.getElementById('refreshBtn').addEventListener('click',()=>{
+    refreshData();
+    alert('Daten aktualisiert!');
+  });
+
+  // Add new item
+  document.getElementById('addBtn').addEventListener('click',()=>{
+    const name = prompt('Neuer Eintrag:');
+    if(name) alert(`"${name}" wurde hinzugefügt!`);
+  });
+
+  // Export data
+  document.getElementById('exportBtn').addEventListener('click',()=>{
+    const data = {
+      revenue: document.getElementById('revenue').textContent,
+      users: document.getElementById('users').textContent,
+      orders: document.getElementById('orders').textContent,
+      tickets: document.getElementById('tickets').textContent
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dashboard-data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Initial load
+  refreshData();
+</script>
 </body>
 </html>
-```
-
-**Explanation:**
-
-This code creates a basic HTML page with a title, heading, and two paragraphs of text. It serves as a starting point for further development and can be extended to include more features and functionality.
-
-**Actionable Corrections:**
-
-1. **Missing Output from Planner and Coder:** Provide the output from the planner and coder so I can review it and provide more specific feedback.
-2. **Improve Code Quality:** Review the code for any potential bugs, security vulnerabilities, or performance issues.
-3. **Add Features and Functionality:** Extend the basic output to include more features and functionality, such as user input, data processing, and visualization.
-4. **Use a More Robust Templating Engine:** Consider using a more robust templating engine, such as Jinja2 or Mustache, to separate the presentation logic from the application logic.
-
-Please provide the output from the planner and coder so I can review it and provide more specific feedback.
