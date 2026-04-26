@@ -1,0 +1,182 @@
+Hier ist das vollständige Single-File HTML-Webapp mit modernem dunklem Dashboard:
+
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modernes Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #2f343a;
+            --secondary-color: #3a3d41;
+            --accent-color: #3498db;
+            --background-color: #1a1d23;
+            --text-color: #ffffff;
+            --sidebar-width: 250px;
+            --transition-duration: 0.3s;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-duration) ease-in-out;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--primary-color);
+            padding: 20px;
+            transition: width var(--transition-duration) ease-in-out;
+        }
+
+        .sidebar.open {
+            width: var(--sidebar-width);
+        }
+
+        .sidebar.close {
+            width: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        .sidebar li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            color: var(--accent-color);
+        }
+
+        .content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+        }
+
+        .stat-card {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .stat-card p {
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .chart-placeholder {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            padding: 20px;
+        }
+
+        .action-buttons button {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .action-buttons button:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Modernes Dashboard</h1>
+    </div>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#">Startseite</a></li>
+            <li><a href="#">Statistiken</a></li>
+            <li><a href="#">Charts</a></li>
+            <li><a href="#">Einstellungen</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="stat-card">
+            <h2>Statistik 1</h2>
+            <p>Wert: 100</p>
+        </div>
+        <div class="stat-card">
+            <h2>Statistik 2</h2>
+            <p>Wert: 200</p>
+        </div>
+        <div class="stat-card">
+            <h2>Statistik 3</h2>
+            <p>Wert: 300</p>
+        </div>
+        <div class="stat-card">
+            <h2>Statistik 4</h2>
+            <p>Wert: 400</p>
+        </div>
+        <div class="chart-placeholder">
+            <h2>Chart-Platzhalter</h2>
+            <p>Keine Daten verfügbar</p>
+        </div>
+        <div class="action-buttons">
+            <button>Speichern</button>
+            <button>Exportieren</button>
+            <button>Impressum</button>
+        </div>
+    </div>
+
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
+```
+
+Dieses Code-Beispiel erstellt ein modernes dunkles Dashboard mit Sidebar, Header, 4 Stat-Karten, Chart-Platzhalter und Action-Buttons. Die Sidebar kann geöffnet und geschlossen werden, indem man auf den Toggle-Button klickt. Die Stat-Karten und der Chart-Platzhalter sind mit Platzhaltern gefüllt, aber können leicht an Ihre Bedürfnisse angepasst werden. Die Action-Buttons können auch leicht angepasst werden, um Ihre Bedürfnisse zu erfüllen.
