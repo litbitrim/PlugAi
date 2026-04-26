@@ -1,0 +1,161 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Dark Dashboard – Single‑File App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* CSS‑Variablen */
+  :root {
+    --bg-dark: #1e1e2e;
+    --bg-card: #2e2e3e;
+    --accent: #4e9a06;
+    --text-light: #e0e0e0;
+    --text-muted: #a0a0b0;
+    --border: #3e3e4e;
+    --sidebar-width: 260px;
+    --transition: 0.3s ease;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, html { height: 100%; font-family: system-ui, sans-serif; color: var(--text-light); background: var(--bg-dark); }
+  a { color: inherit; text-decoration: none; }
+
+  /* Layout */
+  .app { display: flex; height: 100%; }
+  .sidebar {
+    width: var(--sidebar-width);
+    background: var(--bg-card);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .sidebar a { padding: 0.75rem 1rem; border-radius: 6px; transition: var(--transition); }
+  .sidebar a:hover { background: var(--accent); color: #fff; }
+  .content { flex: 1; display: flex; flex-direction: column; }
+  .header {
+    background: var(--bg-card);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 { font-size: 1.25rem; }
+  .header .actions button { margin-left: 0.5rem; background: var(--accent); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; transition: var(--transition); }
+  .header .actions button:hover { opacity: 0.9; }
+
+  /* Stat Cards */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; padding: 1rem; }
+  .card {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); }
+  .card h3 { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .card .value { font-size: 1.8rem; font-weight: 600; }
+
+  /* Chart placeholder */
+  .chart { flex: 1; padding: 1rem; }
+  .chart canvas { width: 100%; height: 100%; background: var(--bg-card); border-radius: 8px; }
+
+  /* Micro‑Interactions */
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Berichte</a>
+    <a href="#">Einstellungen</a>
+    <a href="#">Hilfe</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Header -->
+    <header class="header">
+      <h1>Dashboard</h1>
+      <div class="actions">
+        <button>Neuer Eintrag</button>
+        <button>Export</button>
+      </div>
+    </header>
+
+    <!-- Stat Cards -->
+    <section class="stats">
+      <div class="card">
+        <h3>Umsatz</h3>
+        <div class="value">€ 12 345</div>
+      </div>
+      <div class="card">
+        <h3>Besucher</h3>
+        <div class="value">3 210</div>
+      </div>
+      <div class="card">
+        <h3>Bestellungen</h3>
+        <div class="value">456</div>
+      </div>
+      <div class="card">
+        <h3>Conversion</h3>
+        <div class="value">3.5 %</div>
+      </div>
+    </section>
+
+    <!-- Chart Placeholder -->
+    <section class="chart">
+      <canvas id="chartCanvas"></canvas>
+    </section>
+  </div>
+</div>
+
+<!-- Optional minimal chart using Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+<script>
+  const ctx = document.getElementById('chartCanvas').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Mon1','Mon2','Mon3','Mon4','Mon5','Mon6','Mon7'],
+      datasets: [{
+        label: 'Umsatz',
+        data: [1200, 1900, 3000, 5000, 4000, 6000, 7000],
+        borderColor: '#4e9a06',
+        backgroundColor: 'rgba(78,154,6,0.1)',
+        tension: 0.4,
+        fill: true,
+        pointRadius: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { display: false } }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: true }
+      }
+    }
+  });
+</script>
+</body>
+</html>
+```
+
+**Erläuterung**
+
+- **CSS‑Variablen** für Farben, Abstände und Übergänge sorgen für einfache Anpassung.
+- **Flexbox** und **Grid** bilden das responsive Layout.
+- **Micro‑Interactions**: Hover‑Effekte, Fokus‑Outline, leichte Animation bei Hover.
+- **Chart.js** (CDN) liefert einen einfachen, modernen Chart‑Placeholder.
+- Alles in einer einzigen HTML‑Datei – sofort einsatzbereit.
